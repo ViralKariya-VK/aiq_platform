@@ -1,0 +1,129 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIQ — {{ task.lab_session.topic }}</title>
+    <link rel="stylesheet" href="{% static 'css/workspace.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="nav-left">
+            <div class="nav-logo">AIQ</div>
+            <div class="nav-sep"></div>
+            <span class="nav-topic">{{ task.lab_session.topic }}</span>
+            <span class="diff-pill diff-{{ task.lab_session.difficulty }}">
+                {% if task.lab_session.difficulty == 1 %}Easy
+                {% elif task.lab_session.difficulty == 2 %}Medium
+                {% else %}Hard{% endif %}
+            </span>
+            <span class="mode-pill mode-{{ task.lab_session.ai_mode }}">
+                {% if task.lab_session.ai_mode == 'guarded' %}🔒 Guarded{% else %}⚡ Unguarded{% endif %}
+            </span>
+        </div>
+        <div class="nav-right">
+            
+            <button id="runBtn" class="run-btn">▶ Run</button>
+            <button id="toggleAI" class="toggle-btn">Hide AI</button>
+            <a href="{% url 'student_dashboard' %}" class="dashboard-btn">Dashboard</a>
+        </div>
+    </nav>
+
+    <div class="workspace">
+
+        <div class="editor-panel" id="editorPanel">
+            <div class="task-bar">
+                <span class="task-label">Task</span>
+                <span class="task-desc">{{ task.task_description }}</span>
+            </div>
+            <div id="monacoEditor" class="monaco-wrap"></div>
+            <div class="output-panel" id="outputPanel">
+                <div class="output-header">
+                    <span class="output-label">Output</span>
+                    <button class="output-clear" id="clearOutput">Clear</button>
+                </div>
+                <div class="output-content" id="outputContent">
+                    <span class="output-placeholder">Run your code to see output here...</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="ai-panel" id="aiPanel">
+            <div class="ai-topbar">
+                <div class="ai-topbar-left">
+                    <div class="ai-dot"></div>
+                    <span class="ai-label">AI Assistance</span>
+                </div>
+                <span class="mode-pill-sm mode-{{ task.lab_session.ai_mode }}">
+                    {% if task.lab_session.ai_mode == 'guarded' %}Logic hints only{% else %}Full assistance{% endif %}
+                </span>
+            </div>
+
+            <div class="messages" id="messages">
+                {% if not prompts %}
+                <div class="empty-chat">
+                    <div class="empty-emoji">👋</div>
+                    <p>Hey <strong>{{ task.student.first_name|default:task.student.username }}</strong>!</p>
+                    <p>I'm your coding assistant. Feel free to ask me anything about your studies!</p>
+                    {% if task.lab_session.ai_mode == 'guarded' %}
+                    <div class="guarded-chip">🔒 Guarded mode — I'll guide, not code for you</div>
+                    {% endif %}
+                </div>
+                {% else %}
+                {% for prompt in prompts %}
+                <div class="msg-row msg-user">
+                    <div class="msg-bubble msg-user-bubble">
+                        <div class="msg-text">{{ prompt.prompt_text }}</div>
+                        <div class="msg-time">{{ prompt.timestamp|time:"H:i" }}</div>
+                    </div>
+                </div>
+                <div class="msg-row msg-ai">
+                    <div class="msg-bubble msg-ai-bubble markdown-render">{{ prompt.ai_response }}</div>
+                </div>
+                {% endfor %}
+                {% endif %}
+            </div>
+
+            <div class="chat-input-box">
+                <textarea id="promptInput" class="chat-textarea" placeholder="Ask something..." rows="1"></textarea>
+                <button class="chat-send-btn" id="sendBtn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2.5">
+                        <line x1="22" y1="2" x2="11" y2="13" />
+                        <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="popup-overlay" id="popupOverlay">
+        <div class="popup-box">
+            <div class="popup-icon">✅</div>
+            <h2 class="popup-title">Submitted!</h2>
+            <p class="popup-msg">Your solution has been submitted successfully.</p>
+            <button class="popup-close" id="popupClose">Close</button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.44.0/min/vs/loader.min.js"></script>
+    <script src="{% static 'js/workspace.js' %}"></script>
+    <script>
+        const TASK_ID = {{ task.id }};
+        const SEND_PROMPT_URL = "{% url 'send_prompt' task.id %}";
+        const CSRF_TOKEN = "{{ csrf_token }}";
+    </script>
+
+</body>
+
+</html>

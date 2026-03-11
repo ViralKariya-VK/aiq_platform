@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIQ — Student Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/student_dashboard.css' %}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-logo">
+            <span class="logo-text">AIQ</span>
+            <span class="logo-sub">Platform</span>
+        </div>
+        <div class="nav-right">
+            <span class="nav-user">{{ user.username }}</span>
+            <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
+        </div>
+    </nav>
+
+    <div class="content">
+        <div class="page-header">
+            <h1>My Tasks</h1>
+            <p class="page-sub">Active assignments from your instructor</p>
+        </div>
+
+        {% if student_tasks %}
+            <div class="tasks-grid">
+                {% for task in student_tasks %}
+                <div class="task-card">
+                    <div class="task-header">
+                        <div class="task-meta">
+                            <span class="topic-badge">
+                                {{ task.lab_session.topic }}
+                            </span>
+                            <span class="difficulty-badge diff-{{ task.lab_session.difficulty }}">
+                                {% if task.lab_session.difficulty == 1 %}Easy
+                                {% elif task.lab_session.difficulty == 2 %}Medium
+                                {% else %}Hard{% endif %}
+                            </span>
+                        </div>
+                        <span class="mode-badge mode-{{ task.lab_session.ai_mode }}">
+                            {% if task.lab_session.ai_mode == 'guarded' %}
+                                🔒 Guarded AI
+                            {% else %}
+                                🤖 Unguarded AI
+                            {% endif %}
+                        </span>
+                    </div>
+
+                    <div class="task-description">
+                        {{ task.task_description|truncatewords:40 }}
+                    </div>
+
+                    <div class="task-footer">
+                        {% if task.started_at %}
+                            <span class="status-started">● In Progress</span>
+                        {% else %}
+                            <span class="status-new">● New</span>
+                        {% endif %}
+                        <a href="{% url 'workspace' task.id %}" 
+                           class="start-btn">
+                            {% if task.started_at %}Continue →{% else %}Start Task →{% endif %}
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+        {% else %}
+            <div class="empty-state">
+                <div class="empty-icon">📋</div>
+                <h2>No active tasks</h2>
+                <p>Your instructor hasn't assigned any tasks yet. Check back soon.</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
