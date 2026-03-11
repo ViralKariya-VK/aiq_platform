@@ -85,13 +85,13 @@ class StudentTask(models.Model):
     )
     task_description = models.TextField()
     started_at = models.DateTimeField(null=True, blank=True)
+    session_started_at = models.DateTimeField(null=True, blank=True)
     submitted_at = models.DateTimeField(null=True, blank=True)
     final_code = models.TextField(blank=True)
     aiq_p1 = models.FloatField(null=True, blank=True)
 
     def __str__(self):
         return f"{self.student.username} - {self.lab_session.topic}"
-
 
 class PromptLog(models.Model):
     student_task = models.ForeignKey(
