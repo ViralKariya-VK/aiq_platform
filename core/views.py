@@ -89,10 +89,6 @@ def student_dashboard(request):
 @login_required
 def workspace(request, task_id):
     task = get_object_or_404(StudentTask, id=task_id, student=request.user)
-    
-    # Block access if already submitted
-    # if task.submitted_at:
-    #     return redirect('results', task_id=task_id)
 
     if not task.started_at:
         task.started_at = timezone.now()
@@ -119,9 +115,9 @@ def send_prompt(request, task_id):
     current_code = data.get('current_code', '')
     prompt_text = data.get('prompt_text', '')
 
-    # Close previous prompt snapshot
+    # Always close and recompute previous prompt snapshot
     last_prompt = task.prompts.order_by('timestamp').last()
-    if last_prompt and last_prompt.code_after == '':
+    if last_prompt:
         last_prompt.code_after = current_code
         last_prompt.adoption_ratio = compute_adoption_ratio(
             last_prompt.ai_code_blocks,
@@ -159,15 +155,12 @@ def submit_task(request, task_id):
 
     task = get_object_or_404(StudentTask, id=task_id, student=request.user)
 
-    # if task.submitted_at:
-    #     return JsonResponse({'error': 'Already submitted'}, status=400)
-
     data = json.loads(request.body)
     final_code = data.get('current_code', '')
 
-    # Close last prompt snapshot
+    # Always close and recompute last prompt on submit
     last_prompt = task.prompts.order_by('timestamp').last()
-    if last_prompt and last_prompt.code_after == '':
+    if last_prompt:
         last_prompt.code_after = final_code
         last_prompt.adoption_ratio = compute_adoption_ratio(
             last_prompt.ai_code_blocks,
@@ -176,18 +169,7 @@ def submit_task(request, task_id):
         )
         last_prompt.save()
 
-    # Compute P1 — average adoption ratio across all prompts
-    
-    # For weighted
-    # all_prompts = task.prompts.exclude(adoption_ratio=None)
-    # if all_prompts.exists():
-    #     avg_adoption = sum(p.adoption_ratio for p in all_prompts) / all_prompts.count()
-    #     aiq_p1 = round((1 - avg_adoption) * 100, 2)
-    # else:
-    #     aiq_p1 = 100.0
-
-    # Temporary Testing
-    # Compute P1 — last prompt only (for testing)
+    # Compute P1 — last prompt only (testing mode)
     last_scored = task.prompts.exclude(adoption_ratio=None).order_by('timestamp').last()
     if last_scored:
         aiq_p1 = round((1 - last_scored.adoption_ratio) * 100, 2)
@@ -213,20 +195,6 @@ def results(request, task_id):
     if not task.submitted_at:
         return redirect('workspace', task_id=task_id)
 
-    # For weighted
-    # all_prompts = task.prompts.exclude(adoption_ratio=None)
-    # avg_adoption = 0
-    # if all_prompts.exists():
-    #     avg_adoption = sum(p.adoption_ratio for p in all_prompts) / all_prompts.count()
-
-    # return render(request, 'results.html', {
-    #     'task': task,
-    #     'avg_adoption': round(avg_adoption * 100, 2),
-    #     'total_prompts': task.prompts.count(),
-    #     'prompts': task.prompts.order_by('timestamp'),
-    # })
-
-    # Temporary Testing
     last_scored = task.prompts.exclude(adoption_ratio=None).order_by('timestamp').last()
     last_adoption = round(last_scored.adoption_ratio * 100, 2) if last_scored else 0
 
@@ -235,8 +203,7 @@ def results(request, task_id):
         'avg_adoption': last_adoption,
         'total_prompts': task.prompts.count(),
         'prompts': task.prompts.order_by('timestamp'),
-})
-
+    })
 
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
@@ -288,9 +255,9 @@ STRICT DOMAIN RULES — follow without exception:
    "Please ask a specific question about your task or a Python/ML
     concept you're struggling with."
 
-5. {mode_instruction}
+4. {mode_instruction}
 
-6. TONE:
+5. TONE:
    Be concise, educational, and encouraging.
    Format responses clearly using markdown."""
         },
@@ -331,7 +298,6 @@ def compute_adoption_ratio(ai_code, code_before, code_after):
     if not ai_code.strip():
         return 0.0
 
-    # Lines too generic to count as meaningful adoption
     BOILERPLATE_PREFIXES = (
         'print(', 'print (', 'def ', 'return', 'import ',
         'from ', 'if __name__', 'pass', 'else:', 'elif ',
@@ -343,10 +309,8 @@ def compute_adoption_ratio(ai_code, code_before, code_after):
         s = line.strip()
         if not s:
             return False
-        # Too short — less than 8 characters is noise
         if len(s) < 8:
             return False
-        # Pure boilerplate
         if s.startswith(BOILERPLATE_PREFIXES):
             return False
         return True
@@ -362,7 +326,6 @@ def compute_adoption_ratio(ai_code, code_before, code_after):
     before_lines = normalize(code_before)
     after_lines = normalize(code_after)
 
-    # If AI had no meaningful lines, no adoption possible
     if not ai_lines:
         return 0.0
 
