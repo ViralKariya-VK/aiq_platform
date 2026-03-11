@@ -31,8 +31,9 @@
             </span>
         </div>
         <div class="nav-right">
-            
+
             <button id="runBtn" class="run-btn">▶ Run</button>
+            <button id="submitBtn" class="submit-btn">Submit</button>
             <button id="toggleAI" class="toggle-btn">Hide AI</button>
             <a href="{% url 'student_dashboard' %}" class="dashboard-btn">Dashboard</a>
         </div>
@@ -121,6 +122,7 @@
     <script>
         const TASK_ID = {{ task.id }};
         const SEND_PROMPT_URL = "{% url 'send_prompt' task.id %}";
+        const SUBMIT_URL = "{% url 'submit_task' task.id %}";
         const CSRF_TOKEN = "{{ csrf_token }}";
     </script>
 

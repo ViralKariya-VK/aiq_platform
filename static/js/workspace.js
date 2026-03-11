@@ -314,6 +314,7 @@ document.getElementById('clearOutput').addEventListener('click', () => {
 
 
 // ── Submit ────────────────────────────────────────────────────────────────────
+// ── Submit ────────────────────────────────────────────────────────────────────
 const submitBtn = document.getElementById('submitBtn');
 const popupOverlay = document.getElementById('popupOverlay');
 const popupClose = document.getElementById('popupClose');
@@ -322,8 +323,30 @@ submitBtn.addEventListener('click', () => {
     popupOverlay.classList.add('visible');
 });
 
-popupClose.addEventListener('click', () => {
-    popupOverlay.classList.remove('visible');
+popupClose.addEventListener('click', async () => {
+    const code = editor ? editor.getValue() : '';
+    popupClose.textContent = 'Submitting...';
+    popupClose.disabled = true;
+
+    try {
+        const res = await fetch(SUBMIT_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': CSRF_TOKEN
+            },
+            body: JSON.stringify({ current_code: code })
+        });
+
+        const data = await res.json();
+        if (data.success) {
+            window.location.href = data.redirect;
+        }
+    } catch {
+        popupClose.textContent = 'Close';
+        popupClose.disabled = false;
+        popupOverlay.classList.remove('visible');
+    }
 });
 
 popupOverlay.addEventListener('click', (e) => {

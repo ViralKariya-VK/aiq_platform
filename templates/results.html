@@ -1,0 +1,195 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIQ — Results</title>
+    <link rel="stylesheet" href="{% static 'css/results.css' %}">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-logo">AIQ</div>
+        <a href="{% url 'student_dashboard' %}" class="back-btn">← Dashboard</a>
+    </nav>
+
+    <div class="page">
+
+        <!-- Header -->
+        <div class="results-header">
+            <div class="submitted-badge">✅ Submitted</div>
+            <h1>Session Results</h1>
+            <p class="results-sub">{{ task.lab_session.topic }} —
+                {{ task.submitted_at|date:"d M Y, H:i" }}</p>
+            <a href="{% url 'workspace' task.id %}" class="reattempt-btn">← Back to Workspace</a>
+        </div>
+
+        <!-- AIQ Score Hero -->
+        <div class="score-hero">
+            <div class="score-ring">
+                <svg viewBox="0 0 120 120" class="ring-svg">
+                    <circle cx="60" cy="60" r="50"
+                        fill="none" stroke="#1a1a1a" stroke-width="10"/>
+                    <circle cx="60" cy="60" r="50"
+                        fill="none" stroke="#4f8ef7" stroke-width="10"
+                        stroke-dasharray="314"
+                        stroke-dashoffset="{{ task.aiq_p1|default:0|floatformat:0 }}"
+                        stroke-linecap="round"
+                        transform="rotate(-90 60 60)"
+                        id="scoreCircle"/>
+                </svg>
+                <div class="score-number">
+                    <span class="score-val">{{ task.aiq_p1|default:0|floatformat:1 }}</span>
+                    <span class="score-max">/100</span>
+                </div>
+            </div>
+            <div class="score-label">AIQ Score</div>
+            <div class="score-note" id="scoreNote">
+                {% if task.aiq_p1 >= 80 %}
+                    🟢 Strong independent thinking
+                {% elif task.aiq_p1 >= 50 %}
+                    🟡 Moderate AI reliance
+                {% else %}
+                    🔴 High AI dependency
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Parameters Grid -->
+        <div class="params-section">
+            <h2 class="section-title">Parameter Breakdown</h2>
+            <div class="params-grid">
+
+                <!-- P1 — LIVE -->
+                <div class="param-card active">
+                    <div class="param-header">
+                        <div class="param-id">P1</div>
+                        <div class="param-status live">● Live</div>
+                    </div>
+                    <div class="param-name">Code Adoption Ratio</div>
+                    <div class="param-desc">
+                        Measures how much AI-generated code was taken verbatim
+                        into the final solution.
+                    </div>
+                    <div class="param-score-row">
+                        <div class="param-score-bar">
+                            <div class="param-score-fill"
+                                style="width: {{ task.aiq_p1|default:0|floatformat:0 }}%">
+                            </div>
+                        </div>
+                        <span class="param-score-val">
+                            {{ task.aiq_p1|default:0|floatformat:1 }}
+                        </span>
+                    </div>
+                    <div class="param-meta">
+                        Avg adoption: {{ avg_adoption }}% across
+                        {{ total_prompts }} prompt{{ total_prompts|pluralize }}
+                    </div>
+                </div>
+
+                <!-- P2 — Coming Soon -->
+                <div class="param-card upcoming">
+                    <div class="param-header">
+                        <div class="param-id">P2</div>
+                        <div class="param-status soon">◦ Coming Soon</div>
+                    </div>
+                    <div class="param-name">Post-Adoption Edit Ratio</div>
+                    <div class="param-desc">
+                        Of the AI code adopted, how much did the student
+                        modify or adapt it to their own solution.
+                    </div>
+                    <div class="param-placeholder">—</div>
+                </div>
+
+                <!-- P3 — Coming Soon -->
+                <div class="param-card upcoming">
+                    <div class="param-header">
+                        <div class="param-id">P3</div>
+                        <div class="param-status soon">◦ Coming Soon</div>
+                    </div>
+                    <div class="param-name">Latency Score</div>
+                    <div class="param-desc">
+                        How long the student worked independently before
+                        sending their first AI prompt.
+                    </div>
+                    <div class="param-placeholder">—</div>
+                </div>
+
+                <!-- P4 — Coming Soon -->
+                <div class="param-card upcoming">
+                    <div class="param-header">
+                        <div class="param-id">P4</div>
+                        <div class="param-status soon">◦ Coming Soon</div>
+                    </div>
+                    <div class="param-name">Prompt Frequency Rate</div>
+                    <div class="param-desc">
+                        How often the student called the AI relative to
+                        the complexity of the task.
+                    </div>
+                    <div class="param-placeholder">—</div>
+                </div>
+
+                <!-- P5 — Coming Soon -->
+                <div class="param-card upcoming">
+                    <div class="param-header">
+                        <div class="param-id">P5</div>
+                        <div class="param-status soon">◦ Coming Soon</div>
+                    </div>
+                    <div class="param-name">Prompt Quality Score</div>
+                    <div class="param-desc">
+                        How thoughtful and specific the student's prompts
+                        were — a signal of deeper engagement.
+                    </div>
+                    <div class="param-placeholder">—</div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Prompt History -->
+        <div class="prompts-section">
+            <h2 class="section-title">Prompt History</h2>
+            {% if prompts %}
+            <div class="prompts-list">
+                {% for prompt in prompts %}
+                <div class="prompt-row">
+                    <div class="prompt-meta">
+                        <span class="prompt-num">#{{ forloop.counter }}</span>
+                        <span class="prompt-time">
+                            {{ prompt.timestamp|time:"H:i" }}
+                        </span>
+                        {% if prompt.adoption_ratio is not None %}
+                        <span class="prompt-p1">
+                            P1: {{ prompt.adoption_ratio|floatformat:2 }}
+                        </span>
+                        {% endif %}
+                    </div>
+                    <div class="prompt-text">{{ prompt.prompt_text }}</div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="no-prompts">No AI prompts were used in this session.</div>
+            {% endif %}
+        </div>
+
+        <!-- Final Code -->
+        <div class="code-section">
+            <h2 class="section-title">Final Submission</h2>
+            <pre class="final-code">{{ task.final_code }}</pre>
+        </div>
+
+    </div>
+
+    <script>
+        // Animate score ring on load
+        const circle = document.getElementById('scoreCircle');
+        const score = {{ task.aiq_p1|default:0|floatformat:1 }};
+        const circumference = 314;
+        const offset = circumference - (score / 100) * circumference;
+        circle.style.strokeDashoffset = offset;
+    </script>
+
+</body>
+</html>
