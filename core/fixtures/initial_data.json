@@ -1,0 +1,1169 @@
+[
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "admin",
+    "model": "logentry"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "auth",
+    "model": "permission"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "auth",
+    "model": "group"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "contenttypes",
+    "model": "contenttype"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "sessions",
+    "model": "session"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "core",
+    "model": "user"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "core",
+    "model": "batch"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "core",
+    "model": "labsession"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "core",
+    "model": "studenttask"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "core",
+    "model": "promptlog"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "74ryhm3kv62vwmnubw25pd98j83x2zn2",
+  "fields": {
+    "session_data": ".eJxVjEEOwiAQRe_C2hAGClNcuvcMBJhBqoYmpV0Z765NutDtf-_9lwhxW2vYOi9hInEWRpx-txTzg9sO6B7bbZZ5busyJbkr8qBdXmfi5-Vw_w5q7PVbK9RQgLkQWGCfBwcqWWUz46jJWVMUxtEU652iqAjBofecPOrBZMfi_QHS5DdP:1w0AUT:EfhWgWc1Bgf0S5CzALf_U0T-4SiblRNBYGMIDmBkH6A",
+    "expire_date": "2026-03-25T03:44:09.525Z"
+  }
+},
+{
+  "model": "core.promptlog",
+  "pk": 13,
+  "fields": {
+    "student_task": 1,
+    "prompt_text": "Hey!",
+    "ai_response": "I am working.",
+    "ai_code_blocks": "",
+    "code_before": "# Start coding here\n",
+    "code_after": "",
+    "timestamp": "2026-03-11T03:44:47.566Z"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add log entry",
+    "content_type": [
+      "admin",
+      "logentry"
+    ],
+    "codename": "add_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change log entry",
+    "content_type": [
+      "admin",
+      "logentry"
+    ],
+    "codename": "change_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete log entry",
+    "content_type": [
+      "admin",
+      "logentry"
+    ],
+    "codename": "delete_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view log entry",
+    "content_type": [
+      "admin",
+      "logentry"
+    ],
+    "codename": "view_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add permission",
+    "content_type": [
+      "auth",
+      "permission"
+    ],
+    "codename": "add_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change permission",
+    "content_type": [
+      "auth",
+      "permission"
+    ],
+    "codename": "change_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete permission",
+    "content_type": [
+      "auth",
+      "permission"
+    ],
+    "codename": "delete_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view permission",
+    "content_type": [
+      "auth",
+      "permission"
+    ],
+    "codename": "view_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add group",
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "codename": "add_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change group",
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "codename": "change_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete group",
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "codename": "delete_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view group",
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "codename": "view_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add content type",
+    "content_type": [
+      "contenttypes",
+      "contenttype"
+    ],
+    "codename": "add_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change content type",
+    "content_type": [
+      "contenttypes",
+      "contenttype"
+    ],
+    "codename": "change_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete content type",
+    "content_type": [
+      "contenttypes",
+      "contenttype"
+    ],
+    "codename": "delete_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view content type",
+    "content_type": [
+      "contenttypes",
+      "contenttype"
+    ],
+    "codename": "view_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add session",
+    "content_type": [
+      "sessions",
+      "session"
+    ],
+    "codename": "add_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change session",
+    "content_type": [
+      "sessions",
+      "session"
+    ],
+    "codename": "change_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete session",
+    "content_type": [
+      "sessions",
+      "session"
+    ],
+    "codename": "delete_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view session",
+    "content_type": [
+      "sessions",
+      "session"
+    ],
+    "codename": "view_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add user",
+    "content_type": [
+      "core",
+      "user"
+    ],
+    "codename": "add_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change user",
+    "content_type": [
+      "core",
+      "user"
+    ],
+    "codename": "change_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete user",
+    "content_type": [
+      "core",
+      "user"
+    ],
+    "codename": "delete_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view user",
+    "content_type": [
+      "core",
+      "user"
+    ],
+    "codename": "view_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add batch",
+    "content_type": [
+      "core",
+      "batch"
+    ],
+    "codename": "add_batch"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change batch",
+    "content_type": [
+      "core",
+      "batch"
+    ],
+    "codename": "change_batch"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete batch",
+    "content_type": [
+      "core",
+      "batch"
+    ],
+    "codename": "delete_batch"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view batch",
+    "content_type": [
+      "core",
+      "batch"
+    ],
+    "codename": "view_batch"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add lab session",
+    "content_type": [
+      "core",
+      "labsession"
+    ],
+    "codename": "add_labsession"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change lab session",
+    "content_type": [
+      "core",
+      "labsession"
+    ],
+    "codename": "change_labsession"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete lab session",
+    "content_type": [
+      "core",
+      "labsession"
+    ],
+    "codename": "delete_labsession"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view lab session",
+    "content_type": [
+      "core",
+      "labsession"
+    ],
+    "codename": "view_labsession"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add student task",
+    "content_type": [
+      "core",
+      "studenttask"
+    ],
+    "codename": "add_studenttask"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change student task",
+    "content_type": [
+      "core",
+      "studenttask"
+    ],
+    "codename": "change_studenttask"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete student task",
+    "content_type": [
+      "core",
+      "studenttask"
+    ],
+    "codename": "delete_studenttask"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view student task",
+    "content_type": [
+      "core",
+      "studenttask"
+    ],
+    "codename": "view_studenttask"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add prompt log",
+    "content_type": [
+      "core",
+      "promptlog"
+    ],
+    "codename": "add_promptlog"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change prompt log",
+    "content_type": [
+      "core",
+      "promptlog"
+    ],
+    "codename": "change_promptlog"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete prompt log",
+    "content_type": [
+      "core",
+      "promptlog"
+    ],
+    "codename": "delete_promptlog"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view prompt log",
+    "content_type": [
+      "core",
+      "promptlog"
+    ],
+    "codename": "view_promptlog"
+  }
+},
+{
+  "model": "core.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$dJIhD0zvnyGAIYxnlkZfth$ycnhjyON5VTn5Fo34z6Yh1OFd4OS6GOtcn97DKD62kw=",
+    "last_login": "2026-03-11T03:39:35.838Z",
+    "is_superuser": true,
+    "username": "Viral",
+    "first_name": "",
+    "last_name": "",
+    "email": "viralkaria.vk@gmail.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-03-10T03:20:51.000Z",
+    "role": "student",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "core.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$cxvTpmQMGL6ywHgCuyZ6MH$kkxgA+3TY6nD1SGQUgk8Wp3Ty3pNogJen7qxsXjm9AE=",
+    "last_login": "2026-03-10T13:08:34Z",
+    "is_superuser": false,
+    "username": "pro_RM",
+    "first_name": "Prof. Rajesh",
+    "last_name": "Maurya",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-03-10T03:23:33Z",
+    "role": "teacher",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "core.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$lPKmvfBPCUOv7kPyQk158Y$hw2nPx/9jW6E+jzDxJf4fXbQWU/dHjcCbNUQdNcfbmA=",
+    "last_login": "2026-03-11T03:44:09.523Z",
+    "is_superuser": false,
+    "username": "86092500047",
+    "first_name": "Viral",
+    "last_name": "Kariya",
+    "email": "viral@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-03-10T03:23:55Z",
+    "role": "student",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "core.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$6suPfw6LjOHjrPWjzJHu3g$aOfvK4bh7+j+VYsyzT7h1QVmUVqXTUYAYVzBjODynLY=",
+    "last_login": "2026-03-10T13:06:22.466Z",
+    "is_superuser": true,
+    "username": "viral",
+    "first_name": "",
+    "last_name": "",
+    "email": "viral@gmail.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-03-10T13:06:08.805Z",
+    "role": "student",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "core.batch",
+  "pk": 1,
+  "fields": {
+    "name": "MSc DS Batch-2",
+    "teacher": [
+      "pro_RM"
+    ],
+    "students": [
+      [
+        "86092500047"
+      ]
+    ]
+  }
+},
+{
+  "model": "core.labsession",
+  "pk": 1,
+  "fields": {
+    "created_by": [
+      "pro_RM"
+    ],
+    "batch": 1,
+    "topic": "Mean Shift Algorithm",
+    "difficulty": 1,
+    "ai_mode": "unguarded",
+    "is_active": true,
+    "created_at": "2026-03-10T13:15:37.352Z"
+  }
+},
+{
+  "model": "core.studenttask",
+  "pk": 1,
+  "fields": {
+    "lab_session": 1,
+    "student": [
+      "86092500047"
+    ],
+    "task_description": "Run Mean Shift Algorithm on any dataset from scikit-learn library datasets",
+    "started_at": "2026-03-10T13:16:55.275Z"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 1,
+  "fields": {
+    "action_time": "2026-03-10T03:23:33.560Z",
+    "user": [
+      "Viral"
+    ],
+    "content_type": [
+      "core",
+      "user"
+    ],
+    "object_id": "2",
+    "object_repr": "teacher1 (teacher)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 2,
+  "fields": {
+    "action_time": "2026-03-10T03:23:42.223Z",
+    "user": [
+      "Viral"
+    ],
+    "content_type": [
+      "core",
+      "user"
+    ],
+    "object_id": "2",
+    "object_repr": "teacher1 (teacher)",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 3,
+  "fields": {
+    "action_time": "2026-03-10T03:23:55.663Z",
+    "user": [
+      "Viral"
+    ],
+    "content_type": [
+      "core",
+      "user"
+    ],
+    "object_id": "3",
+    "object_repr": "student (student)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 4,
+  "fields": {
+    "action_time": "2026-03-10T03:23:57.240Z",
+    "user": [
+      "Viral"
+    ],
+    "content_type": [
+      "core",
+      "user"
+    ],
+    "object_id": "3",
+    "object_repr": "student (student)",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 5,
+  "fields": {
+    "action_time": "2026-03-10T12:58:24.702Z",
+    "user": [
+      "Viral"
+    ],
+    "content_type": [
+      "core",
+      "user"
+    ],
+    "object_id": "3",
+    "object_repr": "student (student)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"password\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 6,
+  "fields": {
+    "action_time": "2026-03-10T13:06:51.682Z",
+    "user": [
+      "viral"
+    ],
+    "content_type": [
+      "core",
+      "user"
+    ],
+    "object_id": "1",
+    "object_repr": "Viral (student)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"password\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 7,
+  "fields": {
+    "action_time": "2026-03-10T13:07:25.262Z",
+    "user": [
+      "viral"
+    ],
+    "content_type": [
+      "core",
+      "user"
+    ],
+    "object_id": "3",
+    "object_repr": "student (student)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"password\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 8,
+  "fields": {
+    "action_time": "2026-03-10T13:07:29.799Z",
+    "user": [
+      "viral"
+    ],
+    "content_type": [
+      "core",
+      "user"
+    ],
+    "object_id": "3",
+    "object_repr": "student (student)",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 9,
+  "fields": {
+    "action_time": "2026-03-10T13:07:35.406Z",
+    "user": [
+      "viral"
+    ],
+    "content_type": [
+      "core",
+      "user"
+    ],
+    "object_id": "3",
+    "object_repr": "student1 (student)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Username\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 10,
+  "fields": {
+    "action_time": "2026-03-10T13:07:45.583Z",
+    "user": [
+      "viral"
+    ],
+    "content_type": [
+      "core",
+      "user"
+    ],
+    "object_id": "2",
+    "object_repr": "teacher1 (teacher)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"password\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 11,
+  "fields": {
+    "action_time": "2026-03-10T13:07:47.143Z",
+    "user": [
+      "viral"
+    ],
+    "content_type": [
+      "core",
+      "user"
+    ],
+    "object_id": "2",
+    "object_repr": "teacher1 (teacher)",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 12,
+  "fields": {
+    "action_time": "2026-03-10T13:14:47.465Z",
+    "user": [
+      "Viral"
+    ],
+    "content_type": [
+      "core",
+      "user"
+    ],
+    "object_id": "2",
+    "object_repr": "pro_RM (teacher)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Username\", \"First name\", \"Last name\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 13,
+  "fields": {
+    "action_time": "2026-03-10T13:15:12.869Z",
+    "user": [
+      "Viral"
+    ],
+    "content_type": [
+      "core",
+      "batch"
+    ],
+    "object_id": "1",
+    "object_repr": "MSc DS Batch-2 - pro_RM",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 14,
+  "fields": {
+    "action_time": "2026-03-10T13:15:37.353Z",
+    "user": [
+      "Viral"
+    ],
+    "content_type": [
+      "core",
+      "labsession"
+    ],
+    "object_id": "1",
+    "object_repr": "Mean Shift Algorithm - MSc DS Batch-2",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 15,
+  "fields": {
+    "action_time": "2026-03-10T13:16:28.521Z",
+    "user": [
+      "Viral"
+    ],
+    "content_type": [
+      "core",
+      "studenttask"
+    ],
+    "object_id": "1",
+    "object_repr": "student1 - Mean Shift Algorithm",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 16,
+  "fields": {
+    "action_time": "2026-03-11T03:39:47.196Z",
+    "user": [
+      "Viral"
+    ],
+    "content_type": [
+      "core",
+      "promptlog"
+    ],
+    "object_id": "12",
+    "object_repr": "Prompt 12 - student1 - Mean Shift Algorithm",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 17,
+  "fields": {
+    "action_time": "2026-03-11T03:39:47.196Z",
+    "user": [
+      "Viral"
+    ],
+    "content_type": [
+      "core",
+      "promptlog"
+    ],
+    "object_id": "11",
+    "object_repr": "Prompt 11 - student1 - Mean Shift Algorithm",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 18,
+  "fields": {
+    "action_time": "2026-03-11T03:39:47.196Z",
+    "user": [
+      "Viral"
+    ],
+    "content_type": [
+      "core",
+      "promptlog"
+    ],
+    "object_id": "10",
+    "object_repr": "Prompt 10 - student1 - Mean Shift Algorithm",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 19,
+  "fields": {
+    "action_time": "2026-03-11T03:39:47.196Z",
+    "user": [
+      "Viral"
+    ],
+    "content_type": [
+      "core",
+      "promptlog"
+    ],
+    "object_id": "9",
+    "object_repr": "Prompt 9 - student1 - Mean Shift Algorithm",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 20,
+  "fields": {
+    "action_time": "2026-03-11T03:39:47.197Z",
+    "user": [
+      "Viral"
+    ],
+    "content_type": [
+      "core",
+      "promptlog"
+    ],
+    "object_id": "8",
+    "object_repr": "Prompt 8 - student1 - Mean Shift Algorithm",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 21,
+  "fields": {
+    "action_time": "2026-03-11T03:39:47.197Z",
+    "user": [
+      "Viral"
+    ],
+    "content_type": [
+      "core",
+      "promptlog"
+    ],
+    "object_id": "7",
+    "object_repr": "Prompt 7 - student1 - Mean Shift Algorithm",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 22,
+  "fields": {
+    "action_time": "2026-03-11T03:39:47.197Z",
+    "user": [
+      "Viral"
+    ],
+    "content_type": [
+      "core",
+      "promptlog"
+    ],
+    "object_id": "6",
+    "object_repr": "Prompt 6 - student1 - Mean Shift Algorithm",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 23,
+  "fields": {
+    "action_time": "2026-03-11T03:39:47.197Z",
+    "user": [
+      "Viral"
+    ],
+    "content_type": [
+      "core",
+      "promptlog"
+    ],
+    "object_id": "5",
+    "object_repr": "Prompt 5 - student1 - Mean Shift Algorithm",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 24,
+  "fields": {
+    "action_time": "2026-03-11T03:39:47.197Z",
+    "user": [
+      "Viral"
+    ],
+    "content_type": [
+      "core",
+      "promptlog"
+    ],
+    "object_id": "4",
+    "object_repr": "Prompt 4 - student1 - Mean Shift Algorithm",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 25,
+  "fields": {
+    "action_time": "2026-03-11T03:39:47.197Z",
+    "user": [
+      "Viral"
+    ],
+    "content_type": [
+      "core",
+      "promptlog"
+    ],
+    "object_id": "3",
+    "object_repr": "Prompt 3 - student1 - Mean Shift Algorithm",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 26,
+  "fields": {
+    "action_time": "2026-03-11T03:39:47.197Z",
+    "user": [
+      "Viral"
+    ],
+    "content_type": [
+      "core",
+      "promptlog"
+    ],
+    "object_id": "2",
+    "object_repr": "Prompt 2 - student1 - Mean Shift Algorithm",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 27,
+  "fields": {
+    "action_time": "2026-03-11T03:39:47.197Z",
+    "user": [
+      "Viral"
+    ],
+    "content_type": [
+      "core",
+      "promptlog"
+    ],
+    "object_id": "1",
+    "object_repr": "Prompt 1 - student1 - Mean Shift Algorithm",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 28,
+  "fields": {
+    "action_time": "2026-03-11T03:40:19.971Z",
+    "user": [
+      "Viral"
+    ],
+    "content_type": [
+      "core",
+      "user"
+    ],
+    "object_id": "3",
+    "object_repr": "Viral_A045 (student)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Username\", \"First name\", \"Last name\", \"Email address\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 29,
+  "fields": {
+    "action_time": "2026-03-11T03:41:51.107Z",
+    "user": [
+      "Viral"
+    ],
+    "content_type": [
+      "core",
+      "user"
+    ],
+    "object_id": "3",
+    "object_repr": "86092500047 (student)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Username\"]}}]"
+  }
+}
+]
