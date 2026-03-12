@@ -1,12 +1,14 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AIQ — Results</title>
     <link rel="stylesheet" href="{% static 'css/results.css' %}">
 </head>
+
 <body>
 
     <nav class="navbar">
@@ -29,29 +31,25 @@
         <div class="score-hero">
             <div class="score-ring">
                 <svg viewBox="0 0 120 120" class="ring-svg">
-                    <circle cx="60" cy="60" r="50"
-                        fill="none" stroke="#1a1a1a" stroke-width="10"/>
-                    <circle cx="60" cy="60" r="50"
-                        fill="none" stroke="#4f8ef7" stroke-width="10"
-                        stroke-dasharray="314"
-                        stroke-dashoffset="{{ task.aiq_p1|default:0|floatformat:0 }}"
-                        stroke-linecap="round"
-                        transform="rotate(-90 60 60)"
-                        id="scoreCircle"/>
+                    <circle cx="60" cy="60" r="50" fill="none" stroke="#1a1a1a" stroke-width="10" />
+                    <circle cx="60" cy="60" r="50" fill="none" stroke="#4f8ef7" stroke-width="10" stroke-linecap="round"
+                        transform="rotate(-90 60 60)" id="scoreCircle" />
                 </svg>
                 <div class="score-number">
-                    <span class="score-val">{{ task.aiq_p1|default:0|floatformat:1 }}</span>
+                    <span class="score-val">
+                        {% if task.aiq_score %}{{ task.aiq_score|floatformat:1 }}{% else %}0{% endif %}
+                    </span>
                     <span class="score-max">/100</span>
                 </div>
             </div>
-            <div class="score-label">AIQ Score</div>
+            <div class="score-label">AIQ SCORE</div>
             <div class="score-note" id="scoreNote">
-                {% if task.aiq_p1 >= 80 %}
-                    🟢 Strong independent thinking
-                {% elif task.aiq_p1 >= 50 %}
-                    🟡 Moderate AI reliance
+                {% if task.aiq_score >= 80 %}
+                🟢 Strong independent thinking
+                {% elif task.aiq_score >= 50 %}
+                🟡 Moderate AI reliance
                 {% else %}
-                    🔴 High AI dependency
+                🔴 High AI dependency
                 {% endif %}
             </div>
         </div>
@@ -75,73 +73,146 @@
                     <div class="param-score-row">
                         <div class="param-score-bar">
                             <div class="param-score-fill"
-                                style="width: {{ task.aiq_p1|default:0|floatformat:0 }}%">
+                                style="width: {% if task.aiq_p1 %}{{ task.aiq_p1|floatformat:0 }}{% else %}0{% endif %}%">
                             </div>
                         </div>
                         <span class="param-score-val">
-                            {{ task.aiq_p1|default:0|floatformat:1 }}
+                            {% if task.aiq_p1 %}{{ task.aiq_p1|floatformat:1 }}{% else %}0{% endif %}
                         </span>
                     </div>
                     <div class="param-meta">
-                        Avg adoption: {{ avg_adoption }}% across
-                        {{ total_prompts }} prompt{{ total_prompts|pluralize }}
+                        {{ total_prompts }} prompt{{ total_prompts|pluralize }} in this session
                     </div>
                 </div>
 
-                <!-- P2 — Coming Soon -->
-                <div class="param-card upcoming">
+                <!-- P2 — LIVE -->
+                <div class="param-card active">
                     <div class="param-header">
                         <div class="param-id">P2</div>
-                        <div class="param-status soon">◦ Coming Soon</div>
+                        <div class="param-status live">● Live</div>
                     </div>
                     <div class="param-name">Post-Adoption Edit Ratio</div>
                     <div class="param-desc">
                         Of the AI code adopted, how much did the student
                         modify or adapt it to their own solution.
                     </div>
-                    <div class="param-placeholder">—</div>
+                    {% if task.aiq_p1 == 100 %}
+                    <div class="param-meta" style="color: #4caf50;">
+                        ✓ No adoption detected — full marks
+                    </div>
+                    {% else %}
+                    <div class="param-score-row">
+                        <div class="param-score-bar">
+                            <div class="param-score-fill"
+                                style="width: {% if task.aiq_p2 %}{{ task.aiq_p2|floatformat:0 }}{% else %}0{% endif %}%">
+                            </div>
+                        </div>
+                        <span class="param-score-val">
+                            {% if task.aiq_p2 %}{{ task.aiq_p2|floatformat:1 }}{% else %}0{% endif %}
+                        </span>
+                    </div>
+                    <div class="param-meta">
+                        Higher score = more independent modification of AI code
+                    </div>
+                    {% endif %}
                 </div>
 
-                <!-- P3 — Coming Soon -->
-                <div class="param-card upcoming">
+                <!-- P3 — LIVE -->
+                <div class="param-card active">
                     <div class="param-header">
                         <div class="param-id">P3</div>
-                        <div class="param-status soon">◦ Coming Soon</div>
+                        <div class="param-status live">● Live</div>
                     </div>
                     <div class="param-name">Latency Score</div>
                     <div class="param-desc">
                         How long the student worked independently before
                         sending their first AI prompt.
                     </div>
-                    <div class="param-placeholder">—</div>
+                    {% if task.aiq_p3 == 100 and total_prompts == 0 %}
+                    <div class="param-meta" style="color: #4caf50;">
+                        ✓ No AI prompts used — full marks
+                    </div>
+                    {% else %}
+                    <div class="param-score-row">
+                        <div class="param-score-bar">
+                            <div class="param-score-fill"
+                                style="width: {% if task.aiq_p3 %}{{ task.aiq_p3|floatformat:0 }}{% else %}0{% endif %}%">
+                            </div>
+                        </div>
+                        <span class="param-score-val">
+                            {% if task.aiq_p3 %}{{ task.aiq_p3|floatformat:1 }}{% else %}0{% endif %}
+                        </span>
+                    </div>
+                    <div class="param-meta">
+                        Higher score = longer independent work before first AI prompt
+                    </div>
+                    {% endif %}
                 </div>
 
-                <!-- P4 — Coming Soon -->
-                <div class="param-card upcoming">
+                <!-- P4 — LIVE -->
+                <div class="param-card active">
                     <div class="param-header">
                         <div class="param-id">P4</div>
-                        <div class="param-status soon">◦ Coming Soon</div>
+                        <div class="param-status live">● Live</div>
                     </div>
                     <div class="param-name">Prompt Frequency Rate</div>
                     <div class="param-desc">
                         How often the student called the AI relative to
                         the complexity of the task.
                     </div>
-                    <div class="param-placeholder">—</div>
+                    {% if task.aiq_p4 == 100 and total_prompts == 0 %}
+                    <div class="param-meta" style="color: #4caf50;">
+                        ✓ No AI prompts used — full marks
+                    </div>
+                    {% else %}
+                    <div class="param-score-row">
+                        <div class="param-score-bar">
+                            <div class="param-score-fill"
+                                style="width: {% if task.aiq_p4 %}{{ task.aiq_p4|floatformat:0 }}{% else %}0{% endif %}%">
+                            </div>
+                        </div>
+                        <span class="param-score-val">
+                            {% if task.aiq_p4 %}{{ task.aiq_p4|floatformat:1 }}{% else %}0{% endif %}
+                        </span>
+                    </div>
+                    <div class="param-meta">
+                        {{ total_prompts }} prompt{{ total_prompts|pluralize }} used —
+                        lower frequency = higher score
+                    </div>
+                    {% endif %}
                 </div>
 
-                <!-- P5 — Coming Soon -->
-                <div class="param-card upcoming">
+                <!-- P5 — LIVE / Coming Soon -->
+                <div class="param-card {% if task.aiq_p5 %}active{% endif %}">
                     <div class="param-header">
                         <div class="param-id">P5</div>
-                        <div class="param-status soon">◦ Coming Soon</div>
+                        <div
+                            class="param-status {% if task.aiq_p5 %}live{% else %}Prompts not used for the task{% endif %}">
+                            {% if task.aiq_p5 %}● Live{% else %}+ Coming Soon{% endif %}
+                        </div>
                     </div>
                     <div class="param-name">Prompt Quality Score</div>
                     <div class="param-desc">
-                        How thoughtful and specific the student's prompts
-                        were — a signal of deeper engagement.
+                        How thoughtful and specific the student's prompts were —
+                        a signal of deeper engagement with the problem.
                     </div>
-                    <div class="param-placeholder">—</div>
+                    {% if task.aiq_p5 %}
+                    <div class="param-score-row">
+                        <div class="param-score-bar">
+                            <div class="param-score-fill"
+                                style="width: {% if task.aiq_p5 %}{{ task.aiq_p5|floatformat:0 }}{% else %}0{% endif %}%">
+                            </div>
+                        </div>
+                        <span class="param-score-val">
+                            {{ task.aiq_p5|floatformat:1 }}
+                        </span>
+                    </div>
+                    <div class="param-meta">
+                        Greetings and off-topic prompts are excluded from scoring
+                    </div>
+                    {% else %}
+                    <div class="param-meta">——</div>
+                    {% endif %}
                 </div>
 
             </div>
@@ -156,12 +227,10 @@
                 <div class="prompt-row">
                     <div class="prompt-meta">
                         <span class="prompt-num">#{{ forloop.counter }}</span>
-                        <span class="prompt-time">
-                            {{ prompt.timestamp|time:"H:i" }}
-                        </span>
-                        {% if prompt.adoption_ratio is not None %}
-                        <span class="prompt-p1">
-                            P1: {{ prompt.adoption_ratio|floatformat:2 }}
+                        <span class="prompt-time">{{ prompt.timestamp|time:"H:i" }}</span>
+                        {% if prompt.prompt_quality_score %}
+                        <span class="prompt-p5">
+                            Q: {{ prompt.prompt_quality_score|floatformat:0 }}/5
                         </span>
                         {% endif %}
                     </div>
@@ -183,13 +252,14 @@
     </div>
 
     <script>
-        // Animate score ring on load
         const circle = document.getElementById('scoreCircle');
-        const score = {{ task.aiq_p1|default:0|floatformat:1 }};
-        const circumference = 314;
+        const score = {% if task.aiq_score %}{ { task.aiq_score | floatformat: 1 } } {% else %} 0{% endif %};
+        const circumference = 2 * Math.PI * 50;
+        circle.style.strokeDasharray = circumference;
         const offset = circumference - (score / 100) * circumference;
         circle.style.strokeDashoffset = offset;
     </script>
 
 </body>
+
 </html>

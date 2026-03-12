@@ -89,6 +89,11 @@ class StudentTask(models.Model):
     submitted_at = models.DateTimeField(null=True, blank=True)
     final_code = models.TextField(blank=True)
     aiq_p1 = models.FloatField(null=True, blank=True)
+    aiq_p2 = models.FloatField(null=True, blank=True)
+    aiq_p3 = models.FloatField(null=True, blank=True)
+    aiq_p4 = models.FloatField(null=True, blank=True)
+    aiq_p5 = models.FloatField(null=True, blank=True)
+    aiq_score = models.FloatField(null=True, blank=True)
 
     def __str__(self):
         return f"{self.student.username} - {self.lab_session.topic}"
@@ -106,6 +111,8 @@ class PromptLog(models.Model):
     code_after = models.TextField(blank=True)
     adoption_ratio = models.FloatField(null=True, blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
+
+    prompt_quality_score = models.FloatField(null=True, blank=True)
 
     def __str__(self):
         return f"Prompt {self.id} - {self.student_task}"
